@@ -1,6 +1,8 @@
 #!/bin/bash
 #Delete branches script by jquiroz 2023
 
+default_branch="master"
+
 #Check supplied parameter
 #If no parameter was supplied, check if the current directory is a git repo 
 if [ -z "$1" ]; then
@@ -22,21 +24,22 @@ fi
 
 #List branches in local repo
 cd $repo_location
-branches=$(git branch | grep -ve " master$")
+branches=$(git branch | grep -ve $default_branch)
 if [[ -z $branches ]]; then
-echo "There no branches (other than master) in this local repo"
+echo "There no branches (other than $default_branch) in this local repo"
 exit
 fi
 
 echo "The following local branches will be deleted:"
-git branch | grep -ve " master$"
+git branch | grep -ve $default_branch
 
 #Ask user for confirmation
 echo "Press enter to continue, or Ctrl C to abort"
 read answer
 if [[ $answer = "" ]]
 then
-echo "Deleting non-master branches from repo" $repo_location
-git branch | grep -ve " master$" | xargs -I{} git branch -D {}
+echo "Deleting non-$default_branch branches from repo" $repo_location
+git checkout $default_branch &> /dev/null
+git branch | grep -ve $default_branch | xargs -I{} git branch -D {}
 fi
 exit
