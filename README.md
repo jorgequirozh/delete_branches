@@ -1,19 +1,24 @@
-## USAGE
+## Usage
 ```
 $ chmod +x delete_branches.sh
 ./delete_branches.sh
 ```
-This will list all branches within the current directory and prompt the user to delete them.
-
-Directory can also be overriden by specifying the full or path containing the desired repository after the script
+- This will list all branches within the current directory and prompt the user to delete them.
+- Directory can also be overriden by specifying the full or path containing the desired repository after the script
 ```
 ./delete_repos.sh /home/admin/Documents/Repo/myproject
 ```
 
-## OPTIONS
+## Options
 - Default branch can be edited by modifying varible default_branch
 
-## OUTPUT EXAMPLE
+## Running from any location 
+- Add the following line to your .bash_profile
+```
+alias delete_branches="/Full/Path/To/The/Script/update_repos.sh"
+```
+
+## Output Example
 ```
 $ git checkout -b test
 Switched to a new branch 'test'
